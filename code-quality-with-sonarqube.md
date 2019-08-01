@@ -1,0 +1,210 @@
+
+# Improving Code Quality with Sonarqube!
+
+<img src="https://www.sonarqube.org/assets/logo-31ad3115b1b4b120f3d1efd63e6b13ac9f1f89437f0cf6881cc4d8b5603a52b4.svg" width="200">
+
+&copy; 2019 Robert Monnet
+
+###### licensed under the [Creative Commons Attribution 4.0 Int. License](http://creativecommons.org/licenses/by/4.0/) ![license](https://i.creativecommons.org/l/by/4.0/80x15.png)
+
+---
+
+## Sonarqube
+
+### What is Sonarqube?
+
+- Server based, static code analyzer
+- Work with maven, gradle
+- Provides useful measures on Code Quality
+- Act as a "code reviewer", including advice on how to fix problem 
+
+### What about other static analyzer tools?
+
+- Some overlap with other tools (Checkstyle, Findbugs, Fortify)
+- Best practice is to use more than one tool
+- Highly likely that independent reviewer will run sonarqube on your code 
+
+---
+
+## Sonarqube Metrics
+
+- Reliabillity (bugs)
+- Security (vulnerabilities)
+- Maintainability (code smells, debt)
+- Coverage (test)
+- Duplications (copy and paste)
+- Size (code)
+- Complexity ()
+- issues (bugs + vulnerabilities + code smells)
+
+## Nice features
+
+- Interactive graphic representation
+- Each metrics shows total vs. new
+	- Did you introduce problems recently?
+- Each problem is associated with a suggested fix
+---
+
+## Advices when using Sonarqube 
+
+- Think before making a change
+	- false positive?
+	- will I break some logic?
+- Learning tool
+	- patterns for most common issues
+	- learn to recognize issue and how to fix it
+- The boy scout rule
+	- "Always leave the code you're editing a little better than you found it" (Robert C. Martin - Uncle Bob)
+	- Clean up technical debt as you go
+- As a project, agree on a Quality Profile
+	- Quality Profile = set of rules run against your project
+
+---
+
+class: split-30
+
+.column[
+## Project Dashboard
+
+- Shows main metrics
+- Grade each metrics
+	- A-F
+- Grade project
+	- Passed / Failed
+]
+
+.column[
+![](./images/sonarqube-overview.resized.png)
+]
+---
+
+class: split-30
+
+.column[
+## Issues
+
+- All in one:
+	- Bugs
+	- Vulnerabilities
+	- Code smells
+- Severity:
+	- Blocker
+	- Critical
+	- Major
+	- Minor
+	- Info
+- Additive Filters
+- Remember some may be False Positives
+]
+
+.column[
+![](./images/sonarqube-issues.resized.png)
+]
+
+---
+
+class: split-30
+
+.column[
+## Issue Detail
+
+- Show source code
+- Show rule and advice to fix
+- Can add comment
+	- ex: False Positive
+- Can assign to developer
+]
+
+.column[
+![](./images/sonarqube-issue-example.resized.png)
+]
+
+---
+
+class: split-30
+
+.column[
+## Reliability
+## Security 
+## Maintainability
+
+- Shows files with most issues
+- Shows gravity of issues
+- Interactive
+	- Click on a bubble to jump to the file
+]
+
+.column[
+![](./images/sonarqube-reliability.resized.png)
+]
+
+---
+
+class: split-30
+
+.column[
+## Code Coverage
+
+- Shows test failures
+- Shows files with least coverage
+- Interactive
+	- Click on a bubble to jump to the file
+	- margin green/red indicator for lines covered
+]
+
+.column[
+![](./images/sonarqube-coverage.resized.png)
+]
+
+---
+
+## Complexity
+
+- Cyclomatic Complexity
+	- represents how difficult the method is to test
+	- based on number of paths through the method
+		- simple method (no conditional, loop) = 1
+		- method with 1 if statement = 2
+	- Best practice is to keep Cyclomatic Complexity below 10
+	- Pathological cases: switch statement with multiple return
+		- high cyclomatic complexity
+		- easy to test
+
+- Cognitive Complexity
+	- represents how difficult the method is to understand
+	- impact maintainability
+	- metrics specific to sonarqube
+	- see [whitepaper](https://www.sonarsource.com/docs/CognitiveComplexity.pdf)
+		- https://www.sonarsource.com/docs/CognitiveComplexity.pdf
+	
+
+---
+
+## Tips to reduce Cyclomatic Complexity
+
+- Extract methods
+	- extract complex code fragment into method
+	- modified and extracted methods are:
+		- easier to understand
+		- easier to unit test (separation of concerns)
+- complex if conditions
+	- `&&` and `||` in statement tests (`if`, `while`) count as additional paths
+	- compute complex condition before test
+	- somewhat artificial
+- Know when to leave it as is
+	- switch statement when code is clear
+- If you must
+	- How to reduce cyclomatic complexity in 15 [articles](http://codinghelmet.com/articles/reduce-cyclomatic-complexity-null-object)
+		- http://codinghelmet.com/articles/reduce-cyclomatic-complexity-null-object
+
+---
+
+# Demo
+
+   *"The code depicted in this demo is fictitious. Any similarity to actual source code, living or dead is merely coincidental."*
+
+---
+
+## Attributions
+
+- This presentation is using the excellent [remark](https://remarkjs.com) framework to convert markdown to HTML slides.
